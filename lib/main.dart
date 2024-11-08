@@ -49,9 +49,17 @@ class _MyAppState extends State<MyApp> {
           child: Column (
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Container(
+                margin: const EdgeInsets.all(10),
+                child: TextField(
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Enter your name',
+                  ),
+                ),
+              ),
               Text('Name: ${widget.name}', style: const TextStyle(fontSize: 30)),
               Text('Age: ${widget.age}'),
-              Text('Hello World'),
             ]
           )
         ),
