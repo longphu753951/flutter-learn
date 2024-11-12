@@ -3,13 +3,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 final displayProvider = StateProvider<String>((ref) => '0');
 
 final calculatorProvider = StateNotifierProvider<CalculatorNotifier, String>((ref) {
-  return CalculatorNotifier(ref.read);
+  return CalculatorNotifier(ref);
 });
 
 class CalculatorNotifier extends StateNotifier<String> {
-  final Reader read;
+  final Ref ref;
 
-  CalculatorNotifier(this.read) : super('0');
+  CalculatorNotifier(this.ref) : super('0');
 
   void input(String text) {
     // Implement calculator logic here
