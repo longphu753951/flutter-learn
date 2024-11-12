@@ -1,18 +1,9 @@
-import 'package:calculator/widgets/Button.dart';
+import 'package:calculator/providers/CalculatorProvider.dart';
 import 'package:calculator/widgets/CalculatorButtons.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'main.g.dart';
-
-
-@riverpod
-String helloWorld(Ref ref) {
-  return 'say gexx';
-}
-
-// final helloWorldProvider = Provider((ref) => helloWorld(ref));
 
 void main() {
   runApp(
@@ -30,19 +21,33 @@ class MyApp extends ConsumerStatefulWidget {
 class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
-    final String value = ref.watch(helloWorldProvider);
-
+    final calculatorState = ref.watch(calculatorProvider);
     return MaterialApp(
       home: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children:  [
-              CalculatorButtons(),
-            ],
-          ),
-        )
+          body: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Expanded(
+                      child: Container(
+                          alignment: Alignment.bottomRight,
+                          margin: const EdgeInsets.only(bottom: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(calculatorState.equation, style: TextStyle(fontSize: 20)),
+                              Text(calculatorState.result, style: TextStyle(fontSize: 40)),
+                            ],
+                          )),
+                    ),
+                    CalculatorButtons(),
+                  ],
+                ),
+              )
+          )
       ),
     );
   }
